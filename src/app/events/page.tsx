@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
-import { ArrowUpRight, CalendarDays, MapPin } from 'lucide-react';
 import { CTA, Eyebrow, PageHero } from '@/components/Shared';
-import { demoEvents } from '@/lib/data';
-export const metadata:Metadata={title:'Events'};
-export default function Events(){return <><PageHero kicker="GATHER / CONNECT / CELEBRATE" title="The moments that" accent="move us." description="From service days to leadership gatherings, discover spaces where young people come together."/><section className="section"><div className="container"><div className="section-top"><div><Eyebrow>EVENTS & EXPERIENCES</Eyebrow><h2>Where we <em>meet.</em></h2><p className="section-desc">Sample event layouts. Official dates, venues, and registration details have not been provided yet.</p></div><span className="preview-chip">DATES TO BE CONFIRMED</span></div><div className="events-page-grid">{demoEvents.map((e,i)=><article className="event-page-card" key={e.title}><div className="event-page-card__art"><CalendarDays size={54} strokeWidth={1.1}/><span>0{i+1}</span></div><div className="event-page-card__text"><span className="event-category">{e.category}</span><h3>{e.title}</h3><p>{e.description}</p><div className="event-page-meta"><span><CalendarDays size={15}/> Date TBA</span><span><MapPin size={15}/> Venue TBA</span></div></div></article>)}</div></div></section><CTA compact/></>}
+import { EventExplorer } from '@/components/EventExplorer';
+export const metadata: Metadata = { title: 'Events' };
+export default function Events() {
+ return <><PageHero kicker="GATHER / CONNECT / CELEBRATE" title="The moments that" accent="move us." description="From service days to leadership gatherings, discover spaces where young people come together."/>
+ <section className="section"><div className="container"><div className="section-top"><div><Eyebrow>EVENTS & EXPERIENCES</Eyebrow><h2>Where we <em>meet.</em></h2><p className="section-desc">Search by title or filter by interest. Official event information will replace this preview data.</p></div><span className="preview-chip">DATES TO BE CONFIRMED</span></div><EventExplorer/></div></section><CTA compact/></>;
+}
