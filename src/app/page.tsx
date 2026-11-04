@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { ArrowDownRight, ArrowRight, ArrowUpRight, ChevronDown, Globe2, HeartHandshake, Sparkles, Users, Zap } from 'lucide-react';
 import { CTA, Eyebrow, FeaturedProjects, SectionHeading } from '@/components/Shared';
 import { projects } from '@/lib/data';
+import { districtMedia } from '@/lib/district-media';
 
 export default function Home() {
   return <>
@@ -14,7 +15,15 @@ export default function Home() {
           <div className="hero-buttons"><Link className="btn btn-gold" href="/projects">Explore our impact <ArrowUpRight size={19}/></Link><Link className="btn btn-outline" href="/about">Discover D7 <ArrowRight size={17}/></Link></div>
           <div className="hero-footnote"><span className="hero-footnote__symbol">✳</span><span>LEADERSHIP<br/>EXPERIENCE<br/>OPPORTUNITY</span></div>
         </div>
-        <div className="hero-visual"><div className="hero-visual__glow"/><div className="hero-photo"><Image src="/images/hero-community.webp" alt="Illustrative scene of young Leo volunteers together at sunset" fill priority sizes="(max-width: 900px) 100vw, 50vw"/></div><div className="hero-photo__label"><span>THE POWER OF</span><strong>WE.</strong><ArrowDownRight size={36}/></div><div className="hero-visual__vertical">TOGETHER FOR A BETTER TOMORROW / 306 D7</div></div>
+        <div className="hero-visual"><div className="hero-visual__glow"/><div className="hero-photo"> 
+          <Image
+            src={districtMedia.hero.src}
+            alt={districtMedia.hero.alt}
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
+        </div><div className="hero-photo__label"><span>THE POWER OF</span><strong>WE.</strong><ArrowDownRight size={36}/></div><div className="hero-visual__vertical">TOGETHER FOR A BETTER TOMORROW / 306 D7</div></div>
       </div>
       <div className="container hero-bottom"><span>SCROLL TO EXPLORE <ChevronDown size={15}/></span><span>SRI LANKA <span className="gold-spark">✦</span> YOUNG PEOPLE. REAL IMPACT.</span></div>
     </section>

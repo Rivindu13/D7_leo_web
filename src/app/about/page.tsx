@@ -4,8 +4,38 @@ import Link from 'next/link';
 import { ArrowUpRight, Compass, HeartHandshake, Lightbulb, Target } from 'lucide-react';
 import { CTA, Eyebrow, PageHero, SectionHeading } from '@/components/Shared';
 import { districtMission, districtVision, districtContext, legacySources } from '@/lib/legacy-content';
+import { districtMedia } from '@/lib/district-media';
+
 export const metadata:Metadata={title:'About'};
-export default function About(){return <><PageHero kicker="OUR STORY / THE MOVEMENT" title="Purpose in action." accent="Power in unity." description="Leadership and friendship united by service across Leo District 306 D7."/>
-<section className="section"><div className="container about-story"><div className="about-photo"><Image src="/images/hero-community.webp" alt="Illustrative artwork symbolising youth volunteering, not documentary photography" fill sizes="(max-width: 900px) 100vw, 50vw"/></div><div><Eyebrow>WHO WE ARE</Eyebrow><h2 className="display-h2">We believe in the power of <em>young people.</em></h2><p>The previous official site identifies Colombo and Ratnapura as the two districts in D7’s coverage. The district brings together Leos through community service, leadership development and fellowship.</p><p>The earlier About page described {districtContext.claimedClubCount} clubs and {districtContext.claimedMemberCount} members. These are historical claims awaiting confirmation for the current term.</p><Link href="/clubs" className="text-link">Explore our clubs <ArrowUpRight size={17}/></Link></div></div></section>
-<section className="section tone-section"><div className="container"><SectionHeading eyebrow="WHAT GUIDES US" title="Our mission." accent="Our vision."/><div className="legacy-values"><div><Eyebrow>OUR MISSION</Eyebrow><ul>{districtMission.map(m=><li key={m}>{m}</li>)}</ul></div><div><Eyebrow>OUR VISION</Eyebrow><h3>{districtVision}</h3><p>Adapted from the previous official district About page.</p><a className="text-link" href={legacySources.about} target="_blank" rel="noopener noreferrer">Read legacy About page <ArrowUpRight size={17}/></a></div></div></div></section>
-<section className="section"><div className="container"><SectionHeading eyebrow="GROW TOGETHER" title="Leadership." accent="Service. Fellowship."/><div className="values-grid"><div><Compass/><small>01 / LEADERSHIP</small><h3>Find your direction</h3><p>Develop skills and confidence through responsibility.</p></div><div><Target/><small>02 / SERVICE</small><h3>Make an impact</h3><p>Take action on needs in local communities.</p></div><div><HeartHandshake/><small>03 / FELLOWSHIP</small><h3>Build relationships</h3><p>Strengthen ties across Leo clubs and regions.</p></div><div><Lightbulb/><small>04 / GROWTH</small><h3>Keep innovating</h3><p>Seek creative solutions and new experiences.</p></div></div></div></section><CTA compact/></>}
+
+export default function About(){
+    return <>
+    <PageHero kicker="OUR STORY / THE MOVEMENT" 
+        title="Purpose in action." 
+        accent="Power in unity." 
+        description="Leadership and friendship united by service across Leo District 306 D7."
+    />
+    <section className="section"><div className="container about-story">
+        <div className="about-photo">
+            <Image src={districtMedia.about.src} alt={districtMedia.about.alt} fill sizes="(max-width: 900px) 100vw, 50vw"/>
+        </div>
+        <div>
+            <Eyebrow>WHO WE ARE</Eyebrow><h2 className="display-h2">We believe in the power of <em>young people.</em></h2>
+            <p>The previous official site identifies Colombo and Ratnapura as the two districts in D7’s coverage. The district brings together Leos through community service, leadership development and fellowship.</p>
+            <p>The earlier About page described {districtContext.claimedClubCount} clubs and {districtContext.claimedMemberCount} members. These are historical claims awaiting confirmation for the current term.</p>
+            <Link href="/clubs" className="text-link">Explore our clubs <ArrowUpRight size={17}/></Link></div>
+        </div>
+    </section>
+    <section className="section tone-section">
+        <div className="container"><SectionHeading eyebrow="WHAT GUIDES US" title="Our mission." accent="Our vision."/>
+        <div className="legacy-values"><div><Eyebrow>OUR MISSION</Eyebrow><ul>{districtMission.map(m=><li key={m}>{m}</li>)}</ul></div>
+        <div><Eyebrow>OUR VISION</Eyebrow><h3>{districtVision}</h3><p>Adapted from the previous official district About page.</p><a className="text-link" href={legacySources.about} target="_blank" rel="noopener noreferrer">Read legacy About page <ArrowUpRight size={17}/></a></div></div></div>
+    </section>
+    <section className="section">
+        <div className="container"><SectionHeading eyebrow="GROW TOGETHER" title="Leadership." accent="Service. Fellowship."/>
+        <div className="values-grid"><div><Compass/><small>01 / LEADERSHIP</small><h3>Find your direction</h3><p>Develop skills and confidence through responsibility.</p></div>
+        <div><Target/><small>02 / SERVICE</small><h3>Make an impact</h3><p>Take action on needs in local communities.</p></div><div><HeartHandshake/><small>03 / FELLOWSHIP</small><h3>Build relationships</h3><p>Strengthen ties across Leo clubs and regions.</p></div>
+        <div><Lightbulb/><small>04 / GROWTH</small><h3>Keep innovating</h3><p>Seek creative solutions and new experiences.</p></div></div></div>
+    </section>
+    <CTA compact/></>
+    }
