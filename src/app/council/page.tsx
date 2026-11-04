@@ -1,9 +1,151 @@
+
 import type { Metadata } from 'next';
-import { ArrowUpRight, UserRound, Users } from 'lucide-react';
-import { CTA, Eyebrow, PageHero } from '@/components/Shared';
-import { historicalCouncil, legacySources } from '@/lib/legacy-content';
-export const metadata:Metadata={title:'District Council'};
-export default function Council(){return <><PageHero kicker="THE PEOPLE BEHIND THE PURPOSE" title="Meet our" accent="leaders." description="Explore the district leadership structure and the people represented on the previous official website."/>
- <section className="section"><div className="container"><div className="section-top"><div><Eyebrow>PUBLIC COUNCIL ARCHIVE</Eyebrow><h2>Leading by <em>example.</em></h2><p className="section-desc">Officer names and roles are carried over from the previous public Council page. Verify assignments and obtain approved headshots before publishing for the current term.</p></div><span className="preview-chip">HISTORICAL ROSTER</span></div>
- {historicalCouncil.map(group=><section key={group.group} className="council-group"><h3>{group.group} <span>{group.members.length} records</span></h3><div className="council-grid">{group.members.map((person,i)=><article key={`${group.group}-${person.name}`} className="leader-card"><div className={`leader-card__portrait leader-card__portrait--${i%3}`}><div className="leader-card__ghost"><UserRound size={75} strokeWidth={1}/></div><span className="leader-card__number">{String(i+1).padStart(2,'0')}</span></div><div className="leader-card__details"><span>LEO DISTRICT 306 D7</span><h3>{person.name}</h3><p>{person.role}</p></div></article>)}</div></section>)}
- <div className="notice-row"><Users size={22}/><p>Published names are available now; profile biographies, official photos and current-term verification remain outstanding.</p><a href={legacySources.council} target="_blank" rel="noopener noreferrer">Previous council <ArrowUpRight size={17}/></a></div></div></section><CTA compact/></>}
+import { ChevronDown, UsersRound } from 'lucide-react';
+
+import {
+  CTA,
+  Eyebrow,
+  PageHero,
+} from '@/components/Shared';
+
+import { CouncilMemberCard } from '@/components/CouncilMemberCard';
+import { currentCouncil } from '@/lib/council-data';
+import { historicalCouncil } from '@/lib/legacy-content';
+
+export const metadata: Metadata = {
+  title: 'District Council 2026–2027',
+  description:
+    'Meet the 2026–2027 leadership team of Leo District 306 D7.',
+};
+
+export default function CouncilPage() {
+  const populatedGroups = currentCouncil.filter(
+    (group) => group.members.length > 0
+  );
+
+  const previousCount = historicalCouncil.reduce(
+    (total, group) => total + group.members.length,
+    0
+  );
+
+  return (
+    <>
+      <PageHero
+        kicker="2026 / 2027 DISTRICT COUNCIL"
+        title="Meet our"
+        accent="leaders."
+        description="The people leading Leo District 306 D7 through service, leadership and fellowship."
+      />
+
+      <section className="section current-council">
+        <div className="container">
+          <div className="section-top">
+            <div>
+              <Eyebrow>OUR DISTRICT LEADERSHIP</Eyebrow>
+
+              <h2>
+                Leading by <em>example.</em>
+              </h2>
+
+              <p className="section-desc">
+                Meet the members of the 2026–2027
+                District Council.
+              </p>
+            </div>
+
+            <span className="preview-chip">
+              2026–2027
+            </span>
+          </div>
+
+          {populatedGroups.length > 0 ? (
+            populatedGroups.map((group) => (
+              <section
+                key={group.title}
+                className="current-council__group"
+              >
+                <div className="current-council__heading">
+                  <h3>{group.title}</h3>
+                  <span>
+                    {group.members.length} members
+                  </span>
+                </div>
+
+                <div className="current-council__grid">
+                  {group.members.map((member) => (
+                    <CouncilMemberCard
+                      key={member.id}
+                      member={member}
+                    />
+                  ))}
+                </div>
+              </section>
+            ))
+          ) : (
+            <div className="current-council__empty">
+              <UsersRound size={34} />
+              <div>
+                <h3>
+                  Preparing the 2026–2027 council gallery
+                </h3>
+                <p>
+                  Official council photographs and
+                  profiles will appear as records
+                  are entered.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section className="section council-history">
+        <div className="container">
+          <Eyebrow>COUNCIL ARCHIVE</Eyebrow>
+
+          <div className="section-top">
+            <div>
+              <h2>
+                Previous <em>leadership.</em>
+              </h2>
+
+              <p className="section-desc">
+                A record of officers from the
+                previous district term.
+              </p>
+            </div>
+          </div>
+
+          <details className="council-history__accordion">
+            <summary>
+              <span>View previous council roster</span>
+              <span>{previousCount} records</span>
+              <ChevronDown size={19} />
+            </summary>
+
+            <div className="council-history__content">
+              {historicalCouncil.map((group) => (
+                <div key={group.group}>
+                  <h3>{group.group}</h3>
+
+                  <ul>
+                    {group.members.map((member) => (
+                      <li
+                        key={`${group.group}-${member.name}`}
+                      >
+                        <strong>{member.name}</strong>
+                        <span>{member.role}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <CTA compact />
+    </>
+  );
+}

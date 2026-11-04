@@ -345,3 +345,233 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
     padding: 22px;
   }
 }
+
+/* ===== 2026-2027 District Council ===== */
+
+.current-council {
+  background: #0e0a14;
+}
+
+.current-council__group {
+  margin-bottom: 70px;
+}
+
+.current-council__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid var(--edge);
+  padding-bottom: 18px;
+  margin-bottom: 25px;
+}
+
+.current-council__heading h3 {
+  font: 700 clamp(24px, 3vw, 36px) Outfit, sans-serif;
+  margin: 0;
+}
+
+.current-council__heading span {
+  color: #baafc3;
+  font-size: 12px;
+}
+
+.current-council__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.current-council__card {
+  min-width: 0;
+  border: 1px solid #4f3855;
+  border-radius: 17px;
+  background: #1a1223;
+  overflow: hidden;
+  transition: transform .25s, border-color .25s;
+}
+
+.current-council__card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+
+.current-council__card--president {
+  border-color: #d0a33d;
+}
+
+.current-council__portrait {
+  position: relative;
+  height: 350px;
+  display: grid;
+  place-items: center;
+  color: #d3b3d6;
+  background: linear-gradient(145deg, #41254c, #21152e);
+  overflow: hidden;
+}
+
+.current-council__portrait img {
+  object-fit: cover;
+}
+
+.current-council__featured {
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+  z-index: 2;
+  padding: 8px 12px;
+  border-radius: 40px;
+  background: var(--gold);
+  color: #18101d;
+  font: 800 10px Outfit, sans-serif;
+  letter-spacing: .07em;
+}
+
+.current-council__details {
+  padding: 23px 24px 27px;
+}
+
+.current-council__details > span {
+  display: block;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.current-council__details h3 {
+  font: 700 23px/1.25 Outfit, sans-serif;
+  margin: 11px 0 0;
+}
+
+.current-council__empty {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  border: 1px solid #60436c;
+  border-radius: 16px;
+  padding: 35px;
+  background: #25182f;
+}
+
+.current-council__empty svg {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.current-council__empty h3 {
+  font: 700 22px Outfit, sans-serif;
+  margin: 0 0 8px;
+}
+
+.current-council__empty p {
+  color: #bdafc5;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Previous council archive */
+
+.council-history {
+  background: #130d1b;
+}
+
+.council-history__accordion {
+  background: #211629;
+  border: 1px solid #63466d;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.council-history__accordion summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 23px 28px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+}
+
+.council-history__accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.council-history__accordion summary span:nth-child(2) {
+  margin-left: auto;
+  color: #bdb0c4;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.council-history__accordion summary svg {
+  color: var(--gold);
+  transition: transform .2s;
+}
+
+.council-history__accordion[open] summary svg {
+  transform: rotate(180deg);
+}
+
+.council-history__content {
+  padding: 30px;
+  border-top: 1px solid var(--edge);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.council-history__content h3 {
+  font: 700 21px Outfit, sans-serif;
+  color: var(--gold);
+}
+
+.council-history__content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.council-history__content li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 11px 0;
+  border-bottom: 1px solid #ffffff16;
+}
+
+.council-history__content li strong {
+  font-size: 13px;
+}
+
+.council-history__content li span {
+  color: #b6aabc;
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .current-council__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .current-council__grid,
+  .council-history__content {
+    grid-template-columns: 1fr;
+  }
+
+  .current-council__portrait {
+    height: 320px;
+  }
+
+  .current-council__empty {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .council-history__content {
+    padding: 20px;
+  }
+}
