@@ -859,3 +859,240 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
     min-height: 95px;
   }
 }
+
+/* ===== Compact District Resources ===== */
+
+.resources-section {
+  background: #0e0a15;
+}
+
+.resources-section .resource-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.resources-section .resource-card {
+  min-height: 220px;
+  padding: 25px 27px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12px;
+  border-radius: 15px;
+}
+
+.resources-section .resource-card__top {
+  font-size: 10px;
+}
+
+.resources-section .resource-card__icon {
+  margin: 3px 0 5px;
+}
+
+.resources-section .resource-card h3 {
+  font-size: 24px;
+  margin: 0 0 7px;
+}
+
+.resources-section .resource-card p {
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+.resources-section .resource-card strong {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 12px;
+}
+
+.resources-footnote {
+  color: #a99bb2;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 17px 0 0;
+}
+
+.resources-section .resources-assist {
+  margin-top: 25px;
+}
+
+@media (max-width: 700px) {
+  .resources-section .resource-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .resources-section .resource-card {
+    min-height: 195px;
+    padding: 22px;
+  }
+
+  .resources-section .resource-card h3 {
+    font-size: 22px;
+  }
+}
+
+/* ===== Ascent Magazine ===== */
+
+.ascent-section {
+  background: #0e0a15;
+}
+
+.ascent-section .magazine-grid {
+  grid-template-columns:
+    minmax(0, 0.85fr)
+    minmax(0, 1.15fr);
+  gap: clamp(30px, 6vw, 85px);
+}
+
+.ascent-section .magazine-cover {
+  width: 100%;
+  max-width: 410px;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  min-height: 0;
+}
+
+.ascent-section .magazine-cover strong {
+  font-size: clamp(46px, 5vw, 78px);
+}
+
+.ascent-cover--image {
+  padding: 0;
+  background: #211628;
+}
+
+.ascent-cover--image img {
+  object-fit: contain;
+}
+
+.ascent-edition-label {
+  display: inline-block;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin-top: 18px;
+}
+
+.ascent-issue-title {
+  font: 700 27px Outfit, sans-serif;
+  margin: 15px 0;
+}
+
+.ascent-issue-date {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #c9b9d1;
+  font-size: 13px;
+}
+
+.ascent-issue-date svg {
+  color: var(--gold);
+}
+
+.ascent-section .magazine-copy .btn {
+  margin-top: 8px;
+}
+
+/* Previous editions */
+
+.ascent-archive {
+  background: #150e1d;
+}
+
+.ascent-archive__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.ascent-archive__card {
+  min-width: 0;
+  border: 1px solid #523b5a;
+  border-radius: 16px;
+  background: #1c1426;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ascent-archive__card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+
+.ascent-archive__art {
+  position: relative;
+  height: 270px;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  background: linear-gradient(
+    130deg,
+    #572452,
+    #251536
+  );
+}
+
+.ascent-archive__art img {
+  object-fit: contain;
+}
+
+.ascent-archive__details {
+  padding: 24px;
+}
+
+.ascent-archive__details > span {
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.ascent-archive__details h3 {
+  font: 700 23px Outfit, sans-serif;
+  margin: 12px 0;
+}
+
+.ascent-archive__details p {
+  color: #b8aabe;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ascent-archive__details strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--gold);
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .ascent-section .magazine-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .ascent-archive__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .ascent-section .magazine-cover {
+    max-width: 100%;
+  }
+
+  .ascent-archive__grid {
+    grid-template-columns: 1fr;
+  }
+}
