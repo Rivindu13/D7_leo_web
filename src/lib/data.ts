@@ -17,7 +17,6 @@ export const navigation = [
   { label: 'Events', href: '/events' },
   { label: 'All-Rounders', href: '/all-rounders' },
   { label: 'Ascent', href: '/ascent' },
-  { label: 'Resources', href: '/resources' },
   { label: 'Merch', href: '/merch' },
   { label: 'LMS', href: '/lms' },
 ];

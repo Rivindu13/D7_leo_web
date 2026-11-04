@@ -26,6 +26,14 @@ export function Header() {
         {primaryNavigation.map(item => <Link key={item.href} href={item.href} aria-current={pathname === item.href ? 'page' : undefined} className={pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href + '/')) ? 'active' : ''}>{item.label}</Link>)}
         <details className="nav-more" ref={moreRef}><summary>Explore <ChevronDown size={14}/></summary>
           <div className="nav-more__panel">{moreNavigation.map(item => <Link key={item.href} href={item.href} aria-current={pathname === item.href ? 'page' : undefined}>{item.label}<ArrowUpRight size={14}/></Link>)}
+            <a
+              href={site.districtDirectoryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              District Directory
+              <ArrowUpRight size={14} />
+            </a>
             <Link href="/contact">Contact <ArrowUpRight size={14}/></Link></div></details>
       </nav>
       <div className="header-actions">
@@ -35,6 +43,18 @@ export function Header() {
     </div>
     <nav id="mobile-navigation" className={`mobile-nav ${open ? 'mobile-nav--open' : ''}`} aria-label="Mobile navigation" aria-hidden={!open}>
       {navigation.map((item, index) => <Link key={item.href} tabIndex={open ? 0 : -1} aria-current={pathname === item.href ? 'page' : undefined} href={item.href}><span>{String(index+1).padStart(2,'0')}</span>{item.label}<ArrowUpRight size={17}/></Link>)}
+      <a
+        href={site.districtDirectoryUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabIndex={open ? 0 : -1}
+      >
+        <span>
+          {String(navigation.length + 2).padStart(2, '0')}
+        </span>
+        District Directory
+        <ArrowUpRight size={17} />
+      </a>
       <Link tabIndex={open ? 0 : -1} href="/contact"><span>{String(navigation.length + 1).padStart(2,'0')}</span>Contact<ArrowUpRight size={17}/></Link>
     </nav>
   </header>;
