@@ -19,9 +19,34 @@ export const metadata: Metadata = {
 };
 
 export default function CouncilPage() {
-  const populatedGroups = currentCouncil.filter(
-    (group) => group.members.length > 0
+  
+const populatedGroups = currentCouncil.flatMap((group) => {
+  if (group.title !== 'Executive Board Members') {
+    return group.members.length > 0 ? [group] : [];
+  }
+
+  // District Directors currently listed under EXCO
+  const districtDirectors = group.members.filter(
+    (member) => member.role.startsWith('Director of ')
   );
+
+    // Executive Board members excluding District Directors
+    const executiveMembers = group.members.filter(
+      (member) => !member.role.startsWith('Director of ')
+    );
+
+    return [
+      {
+        title: 'Executive Board Members',
+        members: executiveMembers,
+      },
+      {
+        title: 'District Directors',
+        members: districtDirectors,
+      },
+    ].filter((item) => item.members.length > 0);
+  });
+
 
   const previousCount = historicalCouncil.reduce(
     (total, group) => total + group.members.length,
@@ -57,45 +82,106 @@ export default function CouncilPage() {
               2026–2027
             </span>
           </div>
+        
+        
+        {populatedGroups.length > 0 ? (
+          populatedGroups.map((group) => {
+            const isExecutiveGroup =
+              group.title === 'Executive Board Members';
 
-          {populatedGroups.length > 0 ? (
-            populatedGroups.map((group) => (
+            const featuredRoles = [
+              'District President',
+              'Immediate Past District President',
+            ];
+
+            // President first, Immediate Past President second.
+            const featuredMembers = isExecutiveGroup
+              ? featuredRoles.flatMap((role) =>
+                  group.members.filter(
+                    (member) => member.role === role
+                  )
+                )
+              : [];
+
+            const regularMembers = isExecutiveGroup
+              ? group.members.filter(
+                  (member) =>
+                    !featuredRoles.includes(member.role)
+                )
+              : group.members;
+
+            return (
               <section
                 key={group.title}
                 className="current-council__group"
               >
                 <div className="current-council__heading">
                   <h3>{group.title}</h3>
-                  <span>
-                    {group.members.length} members
-                  </span>
+                  <span>{group.members.length} members</span>
                 </div>
 
-                <div className="current-council__grid">
-                  {group.members.map((member) => (
-                    <CouncilMemberCard
-                      key={member.id}
-                      member={member}
-                    />
-                  ))}
-                </div>
+                {/* First row: two featured leaders */}
+                {featuredMembers.length > 0 && (
+                  <div className="current-council__featured-grid">
+                    {featuredMembers.map((member) => (
+                      <CouncilMemberCard
+                        key={member.id}
+                        member={member}
+                        featured
+                      />
+                    ))}
+                  </div>
+                )}
+ 
+                {regularMembers.length > 0 && (
+                  <div
+                    className={
+                      isExecutiveGroup
+                        ? 'current-council__grid'
+                        : 'council-text-grid'
+                    }
+                  >
+                    {regularMembers.map((member) =>
+                      isExecutiveGroup ? (
+                        // EXCO members: keep photo cards
+                        <CouncilMemberCard
+                          key={member.id}
+                          member={member}
+                        />
+                      ) : (
+                        // All other members: name and position only
+                        <article
+                          className="council-text-card"
+                          key={member.id}
+                        >
+                          <span className="council-text-card__role">
+                            {member.role}
+                          </span>
+
+                          <h4 className="council-text-card__name">
+                            {member.name}
+                          </h4>
+                        </article>
+                      )
+                    )}
+                  </div>
+                )}
               </section>
-            ))
-          ) : (
-            <div className="current-council__empty">
-              <UsersRound size={34} />
-              <div>
-                <h3>
-                  Preparing the 2026–2027 council gallery
-                </h3>
-                <p>
-                  Official council photographs and
-                  profiles will appear as records
-                  are entered.
-                </p>
-              </div>
+            );
+          })
+        ) : (
+          <div className="current-council__empty">
+            <UsersRound size={34} />
+
+            <div>
+              <h3>Preparing the 2026–2027 council gallery</h3>
+              <p>
+                Official council photographs and profiles
+                will appear as records are entered.
+              </p>
             </div>
-          )}
+          </div>
+        )}  
         </div>
       </section>
 

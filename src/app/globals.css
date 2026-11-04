@@ -575,3 +575,287 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
     padding: 20px;
   }
 }
+
+/* ===== Compact District Council Cards ===== */
+
+/* First row: President and Immediate Past President */
+.current-council__featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 300px));
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+/* Remaining council members */
+.current-council__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Groups with exactly 4 members */
+.current-council__grid--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1050px;
+}
+
+/* Smaller cards */
+.current-council__card {
+  min-width: 0;
+  border-radius: 13px;
+}
+
+/* Standard portrait height */
+.current-council__portrait {
+  height: 205px;
+}
+
+/* Featured portraits remain slightly larger */
+.current-council__featured-grid
+.current-council__portrait {
+  height: 265px;
+}
+
+/* Compact name and position section */
+.current-council__details {
+  padding: 15px 15px 18px;
+}
+
+.current-council__details > span {
+  font-size: 10px;
+  line-height: 1.45;
+  letter-spacing: 0.055em;
+}
+
+.current-council__details h3 {
+  font: 700 17px/1.3 Outfit, sans-serif;
+  letter-spacing: -0.02em;
+  margin: 8px 0 0;
+  overflow-wrap: anywhere;
+}
+
+/* Featured leadership cards */
+.current-council__featured-grid
+.current-council__details {
+  padding: 18px;
+}
+
+.current-council__featured-grid
+.current-council__details h3 {
+  font-size: 19px;
+}
+
+.current-council__featured-grid
+.current-council__card {
+  border-color: #9c7840;
+}
+
+/* Medium desktops: 4 columns */
+@media (max-width: 1250px) {
+  .current-council__grid,
+  .current-council__grid--four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Tablets: 3 columns */
+@media (max-width: 990px) {
+  .current-council__grid,
+  .current-council__grid--four {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Small tablets: 2 columns */
+@media (max-width: 680px) {
+  .current-council__grid,
+  .current-council__grid--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .current-council__featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .current-council__portrait {
+    height: 190px;
+  }
+
+  .current-council__featured-grid
+  .current-council__portrait {
+    height: 220px;
+  }
+
+  .current-council__details h3 {
+    font-size: 15px;
+  }
+}
+
+/* Narrow phones: 1 column */
+@media (max-width: 480px) {
+  .current-council__grid,
+  .current-council__grid--four,
+  .current-council__featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .current-council__card {
+    width: 100%;
+    max-width: 340px;
+    margin-inline: auto;
+  }
+
+  .current-council__portrait {
+    height: 250px;
+  }
+
+  .current-council__featured-grid
+  .current-council__portrait {
+    height: 280px;
+  }
+}
+
+/* ===== Center incomplete Council rows ===== */
+
+.current-council__grid,
+.current-council__grid--four {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 16px;
+  max-width: none;
+}
+
+/* Desktop: 5 cards per row */
+.current-council__grid > .current-council__card {
+  flex: 0 0 calc((100% - 4 * 16px) / 5);
+}
+
+/* Groups containing exactly 4 members */
+.current-council__grid--four > .current-council__card {
+  flex-basis: calc((100% - 3 * 16px) / 4);
+}
+
+/* Medium desktop: 4 cards */
+@media (max-width: 1250px) {
+  .current-council__grid > .current-council__card {
+    flex-basis: calc((100% - 3 * 16px) / 4);
+  }
+}
+
+/* Tablet: 3 cards */
+@media (max-width: 990px) {
+  .current-council__grid > .current-council__card {
+    flex-basis: calc((100% - 2 * 16px) / 3);
+  }
+}
+
+/* Small tablet: 2 cards */
+@media (max-width: 680px) {
+  .current-council__grid,
+  .current-council__grid--four {
+    gap: 12px;
+  }
+
+  .current-council__grid > .current-council__card {
+    flex-basis: calc((100% - 12px) / 2);
+  }
+}
+
+/* Mobile: 1 card */
+@media (max-width: 480px) {
+  .current-council__grid > .current-council__card {
+    flex-basis: 100%;
+  }
+}
+
+/* ===== Text-only Council Member Cards ===== */
+
+/* Compact layout with centered incomplete rows */
+.council-text-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 14px;
+}
+
+/* Four compact cards per row */
+.council-text-card {
+  flex: 0 0 calc((100% - 42px) / 4);
+  min-width: 0;
+  min-height: 115px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 22px;
+
+  background: linear-gradient(
+    135deg,
+    #291b35,
+    #181120
+  );
+
+  border: 1px solid #503954;
+  border-radius: 13px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.council-text-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+
+/* Position */
+.council-text-card__role {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Member name */
+.council-text-card__name {
+  font: 700 18px/1.3 Outfit, sans-serif;
+  color: var(--white);
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+/* Medium screens: 3 columns */
+@media (max-width: 1100px) {
+  .council-text-card {
+    flex-basis: calc((100% - 28px) / 3);
+  }
+}
+
+/* Tablets: 2 columns */
+@media (max-width: 750px) {
+  .council-text-card {
+    flex-basis: calc((100% - 14px) / 2);
+    min-height: 105px;
+    padding: 18px;
+  }
+
+  .council-text-card__name {
+    font-size: 16px;
+  }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 480px) {
+  .council-text-card {
+    flex-basis: 100%;
+    min-height: 95px;
+  }
+}
