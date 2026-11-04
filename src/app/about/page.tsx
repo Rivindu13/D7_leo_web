@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { DistrictClubs } from '@/components/DistrictClubs';
 import { AboutPathways } from '@/components/AboutPathways';
 import { ArrowUpRight, Compass, HeartHandshake, Lightbulb, Target } from 'lucide-react';
 import { CTA, Eyebrow, PageHero, SectionHeading } from '@/components/Shared';
@@ -29,7 +30,7 @@ export default function About(){
                 Current-term membership figures and leadership details
                 will be updated once officially confirmed.
             </p>
-            <Link href="/clubs" className="text-link">Explore our clubs <ArrowUpRight size={17}/></Link></div>
+            <Link href="/about#district-clubs" className="text-link">Explore our clubs <ArrowUpRight size={17}/></Link></div>
         </div>
     </section>
     <section className="section tone-section">
@@ -45,5 +46,6 @@ export default function About(){
     </section>
 
     <AboutPathways/>
+    <DistrictClubs />
     <CTA compact/></>
     }

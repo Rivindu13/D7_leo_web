@@ -15,7 +15,7 @@ const pathways = [
     title: 'Find your Leo club',
     description:
       'Explore Alpha and Omega Leo clubs in the district directory.',
-    href: '/clubs',
+    href: '/about#district-clubs',
     action: 'Explore clubs',
     icon: Compass,
   },

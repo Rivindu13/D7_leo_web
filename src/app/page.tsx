@@ -98,7 +98,7 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="section numbers-section"><div className="container numbers-inner"><div><Eyebrow>ONE DISTRICT. MANY POSSIBILITIES.</Eyebrow><h2>Made of people.<br/><em>Driven by purpose.</em></h2></div><div className="numbers-cards"><Link href="/clubs"><Globe2 size={27}/><strong>Our clubs</strong><span>Explore the district <ArrowUpRight size={16}/></span></Link><Link href="/all-rounders"><Sparkles size={27}/><strong>All-Rounders</strong><span>Celebrate achievement <ArrowUpRight size={16}/></span></Link></div></div></section>
+    <section className="section numbers-section"><div className="container numbers-inner"><div><Eyebrow>ONE DISTRICT. MANY POSSIBILITIES.</Eyebrow><h2>Made of people.<br/><em>Driven by purpose.</em></h2></div><div className="numbers-cards"><Link href="/about#district-clubs"><Globe2 size={27}/><strong>Our clubs</strong><span>Explore the district <ArrowUpRight size={16}/></span></Link><Link href="/all-rounders"><Sparkles size={27}/><strong>All-Rounders</strong><span>Celebrate achievement <ArrowUpRight size={16}/></span></Link></div></div></section>
     <CTA />
   </>;
 }

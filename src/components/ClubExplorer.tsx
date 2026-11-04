@@ -3,9 +3,7 @@
 
 import { useMemo, useState } from 'react';
 import { Search, UsersRound, X } from 'lucide-react';
-import {
-  districtClubs
-} from '@/lib/legacy-content';
+import { districtClubs } from '@/lib/legacy-content';
 
 type Division = 'All clubs' | 'Alpha' | 'Omega';
 
@@ -15,23 +13,14 @@ const divisions: Division[] = [
   'Omega',
 ];
 
-// Counts update automatically when club records change.
-const clubCounts: Record<Division, number> = {
-  'All clubs': districtClubs.length,
-  Alpha: districtClubs.filter(
-    (club) => club.division === 'Alpha'
-  ).length,
-  Omega: districtClubs.filter(
-    (club) => club.division === 'Omega'
-  ).length,
-};
+const clubGroups = ['Alpha', 'Omega'] as const;
 
 export function ClubExplorer() {
   const [search, setSearch] = useState('');
   const [division, setDivision] =
     useState<Division>('All clubs');
 
-  const results = useMemo(() => {
+  const filteredClubs = useMemo(() => {
     const query = search.trim().toLowerCase();
 
     return districtClubs
@@ -40,14 +29,23 @@ export function ClubExplorer() {
           division === 'All clubs' ||
           club.division === division;
 
-        const matchesName = club.name
+        const matchesSearch = club.name
           .toLowerCase()
           .includes(query);
 
-        return matchesDivision && matchesName;
+        return matchesDivision && matchesSearch;
       })
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [division, search]);
+
+  const groups = clubGroups
+    .map((name) => ({
+      name,
+      clubs: filteredClubs.filter(
+        (club) => club.division === name
+      ),
+    }))
+    .filter((group) => group.clubs.length > 0);
 
   const resetFilters = () => {
     setSearch('');
@@ -56,19 +54,19 @@ export function ClubExplorer() {
 
   return (
     <div className="club-explorer">
-      {/* Compact club search and filtering */}
+      {/* SEARCH + FILTER */}
       <div className="club-toolbar">
         <label className="directory-search">
           <Search size={18} aria-hidden="true" />
 
           <span className="sr-only">
-            Search Leo clubs
+            Search district clubs
           </span>
 
           <input
             type="search"
-            placeholder="Search club names..."
             value={search}
+            placeholder="Search club names..."
             onChange={(event) =>
               setSearch(event.target.value)
             }
@@ -77,13 +75,15 @@ export function ClubExplorer() {
 
         <label className="club-toolbar__filter">
           <span className="sr-only">
-            Filter by club division
+            Filter by division
           </span>
 
           <select
             value={division}
             onChange={(event) =>
-              setDivision(event.target.value as Division)
+              setDivision(
+                event.target.value as Division
+              )
             }
           >
             {divisions.map((item) => (
@@ -99,7 +99,7 @@ export function ClubExplorer() {
           className="directory-reset"
           onClick={resetFilters}
           disabled={
-            search === '' && division === 'All clubs'
+            !search && division === 'All clubs'
           }
         >
           <X size={15} aria-hidden="true" />
@@ -107,71 +107,47 @@ export function ClubExplorer() {
         </button>
       </div>
 
-      {/* RESULT SUMMARY */}
       <div
         className="directory-result-meta"
         role="status"
         aria-live="polite"
       >
         <span>
-          {results.length} of {districtClubs.length}
-          {' '}historical clubs shown
-        </span>
-
-        <span>
-          CURRENT-TERM DETAILS NOT YET VERIFIED
+          Showing {filteredClubs.length} of{' '}
+          {districtClubs.length} district clubs
         </span>
       </div>
 
-      {/* CLUB CARDS */}
-      {results.length > 0 ? (
-        <div className="clubs-grid">
-          {results.map((club, index) => (
-            <article
-              className="club-card"
-              key={club.id}
+      {/* CLUB DIRECTORY */}
+      {filteredClubs.length > 0 ? (
+        <div className="club-directory-columns">
+          {groups.map((group) => (
+            <section
+              className="club-directory-group"
+              key={group.name}
             >
-              <div className="club-card__identity">
+              <div className="club-directory-group__header">
                 <UsersRound
-                  size={46}
-                  strokeWidth={1.2}
+                  size={23}
                   aria-hidden="true"
                 />
 
-                <span className="club-card__index">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
+                <h3>{group.name} Leo Clubs</h3>
               </div>
 
-              <div className="club-card__details">
-                <div className="club-card__meta">
-                  <span>
-                    {club.division} Leo Club
-                  </span>
-                </div>
-
-                <h3>{club.name}</h3>
-
-                <p>
-                  Listed in the previous district
-                  directory. Current-term status,
-                  official logo, and contact details
-                  are pending confirmation.
-                </p>
-
-                <div className="club-card__bottom">
-                  <span>
-                    <UsersRound
-                      size={16}
+              <ul className="club-directory-list">
+                {group.clubs.map((club) => (
+                  <li key={club.id}>
+                    <span
+                      className="club-directory-dot"
                       aria-hidden="true"
                     />
-                    HISTORICAL LISTING
-                  </span>
 
-                  <span>PROFILE PENDING</span>
-                </div>
-              </div>
-            </article>
+                    <span>{club.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
           ))}
         </div>
       ) : (
@@ -184,8 +160,7 @@ export function ClubExplorer() {
           <h3>No matching clubs found</h3>
 
           <p>
-            Try another club name or select a
-            different division.
+            Try another club name or division.
           </p>
 
           <button

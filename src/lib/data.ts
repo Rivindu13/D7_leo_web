@@ -13,7 +13,6 @@ export const navigation = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Council', href: '/council' },
-  { label: 'Clubs', href: '/clubs' },
   { label: 'Projects', href: '/projects' },
   { label: 'Events', href: '/events' },
   { label: 'All-Rounders', href: '/all-rounders' },
