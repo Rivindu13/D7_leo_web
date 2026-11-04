@@ -166,3 +166,95 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
     min-height: 240px;
   }
 }
+
+/* ===== Clubs: compact, full-width search toolbar ===== */
+/* Scoped to /clubs so shared directory controls elsewhere stay unchanged. */
+.club-explorer {
+  width: 100%;
+  min-width: 0;
+}
+
+.club-explorer .club-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px 104px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: none; /* Align with the club cards and page content. */
+  margin: 0 0 16px;
+  padding: 9px;
+  background: linear-gradient(115deg, #26162c, #17111f);
+  border: 1px solid #59375d;
+  border-radius: 14px;
+}
+
+.club-explorer .club-toolbar .directory-search {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  margin: 0;
+  padding: 0 12px;
+  border-radius: 9px;
+}
+
+.club-explorer .club-toolbar .directory-search input {
+  min-width: 0;
+  width: 100%;
+}
+
+.club-explorer .club-toolbar__filter {
+  display: block;
+  min-width: 0;
+}
+
+.club-explorer .club-toolbar__filter select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  padding: 0 12px;
+  color: var(--white);
+  background: #100c19;
+  border: 1px solid #52415a;
+  border-radius: 9px;
+  font: 500 13px 'DM Sans', sans-serif;
+  cursor: pointer;
+}
+
+.club-explorer .club-toolbar__filter select:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.club-explorer .club-toolbar .directory-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  padding: 0 10px;
+  border-radius: 9px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.club-explorer .club-toolbar .directory-reset:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .club-explorer .club-toolbar {
+    grid-template-columns: minmax(0, 1fr) 96px;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .club-explorer .club-toolbar .directory-search {
+    grid-column: 1 / -1;
+  }
+}
