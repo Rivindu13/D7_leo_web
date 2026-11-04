@@ -78,3 +78,91 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 .achievement-controls{display:grid;grid-template-columns:1fr minmax(200px,.38fr);gap:15px;align-items:end;margin-bottom:20px}.achievement-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.achievement-card{background:linear-gradient(120deg,#21152e,#15101e);border:1px solid #ffffff26;border-radius:17px;padding:25px;display:flex;gap:18px;min-height:190px}.achievement-card__icon{color:var(--gold);flex-shrink:0}.achievement-card small{font-size:11px;letter-spacing:.08em;color:var(--gold);text-transform:uppercase}.achievement-card h3{font:700 21px Outfit,sans-serif;margin:10px 0}.achievement-card p{color:#c4b6ce;font-size:13px;line-height:1.6}.achievement-card span{font-size:11px;color:#b4a6bd}
 @media(max-width:1000px){.achievement-grid{grid-template-columns:repeat(2,1fr)}.legacy-values{grid-template-columns:1fr}}
 @media(max-width:650px){.directory-controls--compact,.achievement-controls,.achievement-grid{grid-template-columns:1fr}.council-group>h3 span{float:none;display:block;margin-top:10px}.legacy-values>div{padding:24px}}
+
+
+/* About Page - Explore District */
+
+.about-pathways {
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(131, 45, 144, 0.12),
+      transparent 35%
+    ),
+    #120d1b;
+}
+
+.about-pathways__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.about-pathways__card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 300px;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    #291a35,
+    #17101f
+  );
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.about-pathways__card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.about-pathways__card > svg {
+  color: var(--gold);
+}
+
+.about-pathways__card small {
+  color: #ce9ec9;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.about-pathways__card h3 {
+  font: 700 25px Outfit, sans-serif;
+  letter-spacing: -0.03em;
+  margin: 10px 0 0;
+}
+
+.about-pathways__card p {
+  color: #b7adbf;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.about-pathways__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .about-pathways__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-pathways__card {
+    min-height: 240px;
+  }
+}

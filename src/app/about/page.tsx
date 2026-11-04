@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AboutPathways } from '@/components/AboutPathways';
 import { ArrowUpRight, Compass, HeartHandshake, Lightbulb, Target } from 'lucide-react';
 import { CTA, Eyebrow, PageHero, SectionHeading } from '@/components/Shared';
-import { districtMission, districtVision, districtContext, legacySources } from '@/lib/legacy-content';
+import { districtMission, districtVision, legacySources } from '@/lib/legacy-content';
 import { districtMedia } from '@/lib/district-media';
 
 export const metadata:Metadata={title:'About'};
@@ -22,7 +23,12 @@ export default function About(){
         <div>
             <Eyebrow>WHO WE ARE</Eyebrow><h2 className="display-h2">We believe in the power of <em>young people.</em></h2>
             <p>The previous official site identifies Colombo and Ratnapura as the two districts in D7’s coverage. The district brings together Leos through community service, leadership development and fellowship.</p>
-            <p>The earlier About page described {districtContext.claimedClubCount} clubs and {districtContext.claimedMemberCount} members. These are historical claims awaiting confirmation for the current term.</p>
+            <p>
+                Our district club and leadership directories include
+                historical records from previous district terms.
+                Current-term membership figures and leadership details
+                will be updated once officially confirmed.
+            </p>
             <Link href="/clubs" className="text-link">Explore our clubs <ArrowUpRight size={17}/></Link></div>
         </div>
     </section>
@@ -37,5 +43,7 @@ export default function About(){
         <div><Target/><small>02 / SERVICE</small><h3>Make an impact</h3><p>Take action on needs in local communities.</p></div><div><HeartHandshake/><small>03 / FELLOWSHIP</small><h3>Build relationships</h3><p>Strengthen ties across Leo clubs and regions.</p></div>
         <div><Lightbulb/><small>04 / GROWTH</small><h3>Keep innovating</h3><p>Seek creative solutions and new experiences.</p></div></div></div>
     </section>
+
+    <AboutPathways/>
     <CTA compact/></>
     }
